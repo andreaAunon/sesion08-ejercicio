@@ -2,7 +2,6 @@ package es.babel.demo.services;
 
 import es.babel.demo.entities.BankAccount;
 import es.babel.demo.repositories.IBankAccountRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,7 +12,6 @@ public class BankAccountService implements IBankAccountService {
 
     private IBankAccountRepository bankAccountRepository;
 
-    @Autowired
     public BankAccountService(IBankAccountRepository bankAccountRepository){
         this.bankAccountRepository = bankAccountRepository;
     }

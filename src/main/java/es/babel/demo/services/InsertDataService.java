@@ -1,7 +1,6 @@
 package es.babel.demo.services;
 
 import jakarta.annotation.PostConstruct;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -9,7 +8,6 @@ public class InsertDataService {
 
     private BankAccountService bankAccountService;
 
-    @Autowired
     public InsertDataService(BankAccountService bankAccountService){
         this.bankAccountService = bankAccountService;
     }

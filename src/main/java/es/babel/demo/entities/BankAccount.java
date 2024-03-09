@@ -11,6 +11,10 @@ public class BankAccount {
 
     private double fondos;
 
+    public BankAccount(){
+
+    }
+
     public BankAccount(String iban, double fondos){
         super();
         this.iban = iban;

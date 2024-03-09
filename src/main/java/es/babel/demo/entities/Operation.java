@@ -17,6 +17,10 @@ public class Operation {
     @JoinColumn(name="iban")
     private BankAccount bankAccount;
 
+    public Operation(){
+
+    }
+
     public Operation(Long idOperation, Double cantidad, MovementEnum movementType){
         super();
         this.idOperation = idOperation;
