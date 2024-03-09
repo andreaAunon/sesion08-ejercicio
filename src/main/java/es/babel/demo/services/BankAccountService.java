@@ -2,6 +2,7 @@ package es.babel.demo.services;
 
 import es.babel.demo.entities.BankAccount;
 import es.babel.demo.repositories.IBankAccountRepository;
+import es.babel.demo.services.interfaces.IBankAccountService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,23 +18,13 @@ public class BankAccountService implements IBankAccountService {
     }
 
     @Override
-    public List<String> getBankAccounts() {
-        List<BankAccount> bankAccounts = bankAccountRepository.findAll();
-        List<String> bankAccountsText = new ArrayList<>();
-
-        for(BankAccount bankAccount : bankAccounts){
-            bankAccountsText.add(bankAccount.toString());
-        }
-
-        return bankAccountsText;
+    public List<BankAccount> getBankAccounts() {
+        return bankAccountRepository.findAll();
     }
 
     @Override
-    public void createBankAccount(String iban, double fondos) {
-        BankAccount newBankAccount = new BankAccount(iban,fondos);
-        newBankAccount.setIban(iban);
-        newBankAccount.setFondos(fondos);
-
-        bankAccountRepository.save(newBankAccount);
+    public String createBankAccount(BankAccount bankAccount) {
+        bankAccountRepository.save(bankAccount);
+        return "Cuenta añadida correctamente";
     }
 }

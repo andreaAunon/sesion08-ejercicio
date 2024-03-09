@@ -1,4 +1,4 @@
-package es.babel.demo.services;
+package es.babel.demo.services.interfaces;
 
 import org.springframework.stereotype.Service;
 
