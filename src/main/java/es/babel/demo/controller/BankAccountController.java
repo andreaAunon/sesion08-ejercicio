@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import es.babel.demo.utils.Log;
 
 @RestController
 @RequestMapping("/cuenta")
@@ -24,6 +25,7 @@ public class BankAccountController {
     @GetMapping("/init")
     public String init(){
         this.bankAccountService.init();
+        Log.info("BD iniciada");
         return "BD iniciada";
     }
 

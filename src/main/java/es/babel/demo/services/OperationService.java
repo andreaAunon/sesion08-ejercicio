@@ -3,11 +3,11 @@ package es.babel.demo.services;
 import es.babel.demo.entities.BankAccount;
 import es.babel.demo.entities.Operation;
 import es.babel.demo.entities.enums.MovementEnum;
-import es.babel.demo.repositories.IBankAccountRepository;
 import es.babel.demo.repositories.IOperationRepository;
 import es.babel.demo.services.interfaces.IBankAccountService;
 import es.babel.demo.services.interfaces.IOperationService;
 import org.springframework.stereotype.Service;
+import es.babel.demo.utils.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,11 +27,13 @@ public class OperationService implements IOperationService {
     @Override
     public String createOperation(Operation operation) {
         this.operationRepository.save(operation);
+        Log.info("Se ha creado una nueva operación");
         return "Operacion correctamente";
     }
 
     @Override
     public String transfer(Operation operation) {
+        Log.info("Se ha realizado una transferencia");
         // Primero se revisa que la cuenta a donde se realiza la operación existe
         if(this.bankAccountService.findAccount(operation.getCuentaReceptor()) != null){
             // Ahora se mira que la cuenta receptora sea de la misma compañia
@@ -70,6 +72,7 @@ public class OperationService implements IOperationService {
 
         BankAccount cuentaReceptor = this.bankAccountService.findAccount(operation.getCuentaReceptor());
         cuentaReceptor.setFondos(cuentaReceptor.getFondos() + operation.getCantidad());
+        Log.info("Transferencia completada");
     }
 
     private void addIntereses(Operation operation){
@@ -78,8 +81,9 @@ public class OperationService implements IOperationService {
 
         opWithIntereses.setCuentaEmisor(operation.getCuentaEmisor());
         opWithIntereses.setCantidad(3.99);
-        opWithIntereses.setMovementType(MovementEnum.SUB);
+        opWithIntereses.setTipoDeMovimiento(MovementEnum.SUB);
 
         createOperation(opWithIntereses);
+        Log.info("Creada nueva operación con intereses");
     }
 }

@@ -2,8 +2,9 @@ package es.babel.demo.entities;
 
 import es.babel.demo.entities.enums.MovementEnum;
 import jakarta.persistence.*;
-import lombok.Getter;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name="bankAccount")
 public class Operation {
@@ -12,9 +13,11 @@ public class Operation {
     @GeneratedValue
     private Long id;
 
+    @Column
     private Double cantidad;
-    private MovementEnum movementType;
-
+    @Column
+    private MovementEnum tipoDeMovimiento;
+    @Column
     private String cuentaReceptor;
 
     @ManyToOne
@@ -25,53 +28,13 @@ public class Operation {
 
     }
 
-    public Operation(Long id, Double cantidad, MovementEnum movementType, BankAccount cuentaEmisor,
+    public Operation(Long id, Double cantidad, MovementEnum tipoDeMovimiento, BankAccount cuentaEmisor,
                      String cuentaReceptor){
         super();
         this.id = id;
         this.cantidad = cantidad;
-        this.movementType = movementType;
+        this.tipoDeMovimiento = tipoDeMovimiento;
         this.cuentaEmisor = cuentaEmisor;
-        this.cuentaReceptor = cuentaReceptor;
-    }
-
-    public Long getIdOperation() {
-        return id;
-    }
-
-    public void setIdOperation(Long idOperation) {
-        this.id = idOperation;
-    }
-
-    public void setCantidad(Double cantidad) {
-        this.cantidad = cantidad;
-    }
-
-    public Double getCantidad() {
-        return this.cantidad;
-    }
-
-    public MovementEnum getMovementType() {
-        return movementType;
-    }
-
-    public void setMovementType(MovementEnum movementType) {
-        this.movementType = movementType;
-    }
-
-    public BankAccount getCuentaEmisor() {
-        return cuentaEmisor;
-    }
-
-    public void setCuentaEmisor(BankAccount cuentaEmisor) {
-        this.cuentaEmisor = cuentaEmisor;
-    }
-
-    public String getCuentaReceptor() {
-        return cuentaReceptor;
-    }
-
-    public void setCuentaReceptor(String cuentaReceptor) {
         this.cuentaReceptor = cuentaReceptor;
     }
 
@@ -80,7 +43,7 @@ public class Operation {
         return "Operation{" +
                 "id=" + id +
                 ", cantidad=" + cantidad +
-                ", movementType=" + movementType +
+                ", movementType=" + tipoDeMovimiento +
                 ", cuentaReceptor='" + cuentaReceptor + '\'' +
                 ", cuentaEmisor=" + cuentaEmisor +
                 '}';

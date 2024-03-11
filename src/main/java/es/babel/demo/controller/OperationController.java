@@ -2,10 +2,10 @@ package es.babel.demo.controller;
 
 import es.babel.demo.entities.Operation;
 import es.babel.demo.services.interfaces.IOperationService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import es.babel.demo.utils.Log;
 
 @RestController
 @RequestMapping("/operacion")
@@ -24,6 +24,11 @@ public class OperationController {
 
     @GetMapping("/transfer")
     public String tranfer(@RequestBody Operation operation){
+        if (operation.getCuentaEmisor() == null || operation.getCuentaReceptor() == null) {
+            Log.error("Intento de transferencia con cuentas no existentes");
+            return "Error, alguna cuenta no existe";
+        }
+
         return this.operationsService.transfer(operation);
     }
 
