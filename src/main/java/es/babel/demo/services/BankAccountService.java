@@ -5,7 +5,6 @@ import es.babel.demo.repositories.IBankAccountRepository;
 import es.babel.demo.services.interfaces.IBankAccountService;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,13 +17,27 @@ public class BankAccountService implements IBankAccountService {
     }
 
     @Override
+    public void init(){
+        BankAccount ba1 = new BankAccount("ES9701282343912621679499",6000.0);
+        BankAccount ba2 = new BankAccount("ES7901286755798465925733",4000.0);
+
+        createBankAccount(ba1);
+        createBankAccount(ba2);
+    }
+
+    @Override
     public List<BankAccount> getBankAccounts() {
-        return bankAccountRepository.findAll();
+        return this.bankAccountRepository.findAll();
     }
 
     @Override
     public String createBankAccount(BankAccount bankAccount) {
-        bankAccountRepository.save(bankAccount);
+        this.bankAccountRepository.save(bankAccount);
         return "Cuenta añadida correctamente";
+    }
+
+    @Override
+    public BankAccount findAccount(String iban) {
+        return this.bankAccountRepository.findBankAccountByIban(iban);
     }
 }

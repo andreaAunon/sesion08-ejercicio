@@ -9,13 +9,13 @@ public class BankAccount {
     @Id
     private String iban;
 
-    private double fondos;
+    private Double fondos;
 
     public BankAccount(){
 
     }
 
-    public BankAccount(String iban, double fondos){
+    public BankAccount(String iban, Double fondos){
         super();
         this.iban = iban;
         this.fondos = fondos;
@@ -33,7 +33,7 @@ public class BankAccount {
         this.iban = iban;
     }
 
-    public void setFondos(double fondos) {
+    public void setFondos(Double fondos) {
         this.fondos = fondos;
     }
 

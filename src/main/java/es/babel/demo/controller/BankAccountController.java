@@ -2,7 +2,6 @@ package es.babel.demo.controller;
 
 import es.babel.demo.entities.BankAccount;
 import es.babel.demo.services.interfaces.IBankAccountService;
-import es.babel.demo.services.interfaces.IInsertDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,29 +15,25 @@ import java.util.List;
 public class BankAccountController {
 
     private final IBankAccountService bankAccountService;
-    private final IInsertDataService insertDataService;
 
     @Autowired
-    public BankAccountController(IBankAccountService bankAccountService,
-                                 IInsertDataService insertDataService) {
+    public BankAccountController(IBankAccountService bankAccountService) {
         this.bankAccountService = bankAccountService;
-        this.insertDataService = insertDataService;
     }
 
     @GetMapping("/init")
     public String init(){
-        insertDataService.init();
+        this.bankAccountService.init();
         return "BD iniciada";
     }
 
     @GetMapping("/list")
     public List<BankAccount> getBankAccounts(){
-        return bankAccountService.getBankAccounts();
+        return this.bankAccountService.getBankAccounts();
     }
 
     @GetMapping("/add")
     public String addBankAccount(@RequestBody BankAccount bankAccount){
-        String resultado = bankAccountService.createBankAccount(bankAccount);
-        return resultado;
+        return this.bankAccountService.createBankAccount(bankAccount);
     }
 }

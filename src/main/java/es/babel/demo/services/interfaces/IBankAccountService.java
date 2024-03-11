@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface IBankAccountService {
 
+    void init();
     List<BankAccount> getBankAccounts();
     String createBankAccount(BankAccount bankAccount);
+    BankAccount findAccount(String iban);
 }

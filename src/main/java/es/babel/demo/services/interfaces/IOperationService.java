@@ -1,7 +1,13 @@
 package es.babel.demo.services.interfaces;
 
-import org.springframework.stereotype.Service;
+import es.babel.demo.entities.BankAccount;
+import es.babel.demo.entities.Operation;
 
-@Service
+import java.util.List;
+
 public interface IOperationService {
+
+    String createOperation(Operation operation);
+    String transfer(Operation operation);
+    List<Operation> getOperations(String iban);
 }

@@ -2,6 +2,7 @@ package es.babel.demo.entities;
 
 import es.babel.demo.entities.enums.MovementEnum;
 import jakarta.persistence.*;
+import lombok.Getter;
 
 @Entity
 @Table(name="bankAccount")
@@ -9,40 +10,45 @@ public class Operation {
 
     @Id
     @GeneratedValue
-    private Long idOperation;
+    private Long id;
+
     private Double cantidad;
     private MovementEnum movementType;
 
+    private String cuentaReceptor;
+
     @ManyToOne
     @JoinColumn(name="iban")
-    private BankAccount bankAccount;
+    private BankAccount cuentaEmisor;
 
     public Operation(){
 
     }
 
-    public Operation(Long idOperation, Double cantidad, MovementEnum movementType){
+    public Operation(Long id, Double cantidad, MovementEnum movementType, BankAccount cuentaEmisor,
+                     String cuentaReceptor){
         super();
-        this.idOperation = idOperation;
+        this.id = id;
         this.cantidad = cantidad;
         this.movementType = movementType;
-
+        this.cuentaEmisor = cuentaEmisor;
+        this.cuentaReceptor = cuentaReceptor;
     }
 
     public Long getIdOperation() {
-        return idOperation;
+        return id;
     }
 
     public void setIdOperation(Long idOperation) {
-        this.idOperation = idOperation;
-    }
-
-    public Double getCantidad() {
-        return cantidad;
+        this.id = idOperation;
     }
 
     public void setCantidad(Double cantidad) {
         this.cantidad = cantidad;
+    }
+
+    public Double getCantidad() {
+        return this.cantidad;
     }
 
     public MovementEnum getMovementType() {
@@ -53,22 +59,30 @@ public class Operation {
         this.movementType = movementType;
     }
 
-    public BankAccount getBankAccount() {
-        return bankAccount;
+    public BankAccount getCuentaEmisor() {
+        return cuentaEmisor;
     }
 
-    public void setBankAccount(BankAccount bankAccount) {
-        this.bankAccount = bankAccount;
+    public void setCuentaEmisor(BankAccount cuentaEmisor) {
+        this.cuentaEmisor = cuentaEmisor;
+    }
+
+    public String getCuentaReceptor() {
+        return cuentaReceptor;
+    }
+
+    public void setCuentaReceptor(String cuentaReceptor) {
+        this.cuentaReceptor = cuentaReceptor;
     }
 
     @Override
     public String toString() {
         return "Operation{" +
-                "idOperation=" + idOperation +
+                "id=" + id +
                 ", cantidad=" + cantidad +
                 ", movementType=" + movementType +
-                ", bankAccount=" + bankAccount +
+                ", cuentaReceptor='" + cuentaReceptor + '\'' +
+                ", cuentaEmisor=" + cuentaEmisor +
                 '}';
     }
-
 }
