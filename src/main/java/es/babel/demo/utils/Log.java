@@ -1,11 +1,12 @@
 package es.babel.demo.utils;
 
+import es.babel.demo.Sesion08EjercicioApplication;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class Log {
 
-    private static final Logger logger = LogManager.getLogger(Log.class);
+    private static final Logger logger = LogManager.getLogger(Sesion08EjercicioApplication.class);
 
     public static void trace(String message){
         logger.trace(message);
